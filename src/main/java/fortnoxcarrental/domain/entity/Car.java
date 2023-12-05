@@ -45,4 +45,14 @@ public class Car{
     public Car(String model) {
         this.model = model;
     }
+
+    public void addCarRental(CarRental carRental) {
+        carRentals.add(carRental);
+        carRental.setCar(this);
+    }
+
+    public void removeCarRental(CarRental carRental) {
+        carRentals.remove(carRental);
+        carRental.setCar(null);
+    }
 }
