@@ -35,4 +35,8 @@ public class Car{
         this.model = model;
         this.rentPerDay = rentPerDay;
     }
+
+    public Car(String model) {
+        this.model = model;
+    }
 }

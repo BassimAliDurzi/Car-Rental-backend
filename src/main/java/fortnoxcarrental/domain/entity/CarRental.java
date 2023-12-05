@@ -6,7 +6,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -44,9 +43,6 @@ public class CarRental {
     private Double revenue;
 
 
-
-
-
     public CarRental(String customerName, int age, Car car, LocalDate pickUpdate, LocalDate returnDate) {
         this.customerName = customerName;
         this.age = age;
@@ -64,5 +60,15 @@ public class CarRental {
         this.pickUpdate = pickUpdate;
         this.returnDate = returnDate;
         this.revenue = revenue;
+    }
+
+    public void addCar(Car car) {
+        if (car == null) throw new IllegalArgumentException("Car is null");
+        this.car = car;
+    }
+
+    @PrePersist
+    public void initialDateTime() {
+        createDate = LocalDateTime.now();
     }
 }
