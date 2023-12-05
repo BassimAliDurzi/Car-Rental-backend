@@ -3,6 +3,9 @@ package fortnoxcarrental.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,7 +18,7 @@ public class Car{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private Integer id;
+    private Long id;
 
     private String model;
 
@@ -24,6 +27,9 @@ public class Car{
 
     @Column()
     private Boolean available;
+
+    @OneToMany(mappedBy = "car")
+    private Set<CarRental> carRentals = new HashSet<>();
 
     public Car(String model, double rentPerDay, Boolean available) {
         this.model = model;
