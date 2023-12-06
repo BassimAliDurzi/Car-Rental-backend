@@ -38,6 +38,7 @@ public class CarRentalServiceImpl implements CarRentalService {
                 .build();
 
         CarRental savedCarRental = carRentalRepository.save(carRentalEntity);
+        car.setAvailable(false);
 
         return savedCarRental;
     }
