@@ -60,4 +60,5 @@ public class Car{
         Car car = new Car();
         car.setAvailable(true);
     }
+
 }

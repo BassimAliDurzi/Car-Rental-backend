@@ -1,21 +1,17 @@
 package fortnoxcarrental.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
 @ToString
 
 public class CarDTO {
 
-    @NotBlank
+    @NotBlank(message = "Model cannot be blank")
     private String model;
-
-
 
 }

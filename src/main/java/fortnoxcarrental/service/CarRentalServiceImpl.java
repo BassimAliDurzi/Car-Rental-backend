@@ -1,9 +1,11 @@
 package fortnoxcarrental.service;
 
-import fortnoxcarrental.domain.dto.CarDTO;
+
 import fortnoxcarrental.domain.dto.CarRentalDTO;
+import fortnoxcarrental.domain.entity.Car;
 import fortnoxcarrental.domain.entity.CarRental;
 import fortnoxcarrental.repository.CarRentalRepository;
+import fortnoxcarrental.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +15,24 @@ import java.util.List;
 public class CarRentalServiceImpl implements CarRentalService {
 
     private final CarRentalRepository carRentalRepository;
+    private final CarRepository carRepository;
 
     @Autowired
-    public CarRentalServiceImpl(CarRentalRepository carRentalRepository) {
+    public CarRentalServiceImpl(CarRentalRepository carRentalRepository, CarRepository carRepository) {
         this.carRentalRepository = carRentalRepository;
+        this.carRepository = carRepository;
     }
 
     @Override
     public CarRental registerOrder(CarRentalDTO dto) {
         if (dto == null) throw new IllegalArgumentException("CarRental is null");
 
+        Car car = carRepository.findById(dto.getCarModel()).orElseThrow(() -> new IllegalArgumentException("Car model is not valid"));
+
         CarRental carRentalEntity = CarRental.builder()
                 .customerName(dto.getCustomerName())
                 .age(dto.getAge())
-                .car(dto.getCar())
+                .car(car)
                 .pickUpdate(dto.getPickUpdate())
                 .returnDate(dto.getReturnDate())
                 .build();

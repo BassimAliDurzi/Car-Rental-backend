@@ -68,7 +68,11 @@ public class CarRental {
     }
 
     @PrePersist
-    public void initialDateTime() {
+    public void calculateRevenue() {
         createDate = LocalDateTime.now();
+        if (pickUpdate != null && returnDate != null && car != null) {
+            long days = returnDate.toEpochDay() - pickUpdate.toEpochDay();
+            revenue = days * car.getRentPerDay();
+        }
     }
 }

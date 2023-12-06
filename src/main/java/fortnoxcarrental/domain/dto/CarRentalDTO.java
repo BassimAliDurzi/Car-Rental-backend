@@ -1,6 +1,7 @@
 package fortnoxcarrental.domain.dto;
 
 import fortnoxcarrental.domain.entity.Car;
+import jakarta.validation.ValidationException;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -22,8 +23,8 @@ public class CarRentalDTO {
     @Min(18)
     private int age;
 
-    //@NotNull
-    CarDTO car;
+    @NotNull
+    private String carModel;
 
 
     @NotNull
@@ -37,4 +38,11 @@ public class CarRentalDTO {
     public Car getCar() {
         return null;
     }
+
+    public void validateDates() {
+        if (pickUpdate != null && returnDate != null && returnDate.isBefore(pickUpdate)) {
+            throw new ValidationException("Return date must be after pick-up date");
+        }
+    }
+
 }
