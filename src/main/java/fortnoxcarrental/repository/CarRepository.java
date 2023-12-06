@@ -18,7 +18,4 @@ public interface CarRepository extends JpaRepository<Car, String> {
     @Override
     List<Car> findAll();
 
-    @Modifying
-    @Query("update Car  c set c.available = :available where c.model = :model")
-    void updateAvailable(@Param("model") String model, @Param("available") boolean available);
 }
