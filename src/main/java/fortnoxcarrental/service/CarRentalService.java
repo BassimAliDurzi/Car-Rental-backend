@@ -9,6 +9,5 @@ import java.util.List;
 
 public interface CarRentalService {
     CarRental registerOrder(CarRentalDTO dto);
-    List<CarRental> getAll();
 
 }

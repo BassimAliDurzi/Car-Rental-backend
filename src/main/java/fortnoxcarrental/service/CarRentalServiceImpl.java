@@ -1,6 +1,5 @@
 package fortnoxcarrental.service;
 
-
 import fortnoxcarrental.domain.dto.CarRentalDTO;
 import fortnoxcarrental.domain.entity.Car;
 import fortnoxcarrental.domain.entity.CarRental;
@@ -8,8 +7,6 @@ import fortnoxcarrental.repository.CarRentalRepository;
 import fortnoxcarrental.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CarRentalServiceImpl implements CarRentalService {
@@ -25,9 +22,16 @@ public class CarRentalServiceImpl implements CarRentalService {
 
     @Override
     public CarRental registerOrder(CarRentalDTO dto) {
-        if (dto == null) throw new IllegalArgumentException("CarRental is null");
+        if (dto == null) {
+            throw new IllegalArgumentException("CarRental is null");
+        }
 
-        Car car = carRepository.findById(dto.getCarModel()).orElseThrow(() -> new IllegalArgumentException("Car model is not valid"));
+        Car car = carRepository.findById(dto.getCarModel())
+                .orElseThrow(() -> new IllegalArgumentException("Car model is not valid"));
+
+        if (!car.getAvailable()) {
+            throw new IllegalStateException("Car is not available for rental");
+        }
 
         CarRental carRentalEntity = CarRental.builder()
                 .customerName(dto.getCustomerName())
@@ -38,12 +42,11 @@ public class CarRentalServiceImpl implements CarRentalService {
                 .build();
 
         CarRental savedCarRental = carRentalRepository.save(carRentalEntity);
+        car.setAvailable(false);
+        carRepository.save(car);
 
         return savedCarRental;
     }
-
-    @Override
-    public List<CarRental> getAll() {
-        return null;
-    }
 }
+
+

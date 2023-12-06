@@ -2,14 +2,17 @@ package fortnoxcarrental.repository;
 
 import fortnoxcarrental.domain.entity.CarRental;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CarRentalRepository extends JpaRepository<CarRental,Long> {
+    @Override
+    Optional<CarRental> findById(Long id);
 
-    @Query("SELECT cr from CarRental cr")
-    List<CarRental> findAllCarRental();
+    @Override
+    List<CarRental> findAll();
+
 }

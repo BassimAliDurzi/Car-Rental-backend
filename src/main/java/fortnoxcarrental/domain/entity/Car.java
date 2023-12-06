@@ -45,20 +45,4 @@ public class Car{
         this.model = model;
     }
 
-    public void addCarRentalOrder(CarRental carRental) {
-        carRentals.add(carRental);
-        carRental.setCar(this);
-
-        Car car = new Car();
-        car.setAvailable(false);
-    }
-
-    public void removeCarRentalOrder(CarRental carRental) {
-        carRentals.remove(carRental);
-        carRental.setCar(null);
-
-        Car car = new Car();
-        car.setAvailable(true);
-    }
-
 }
