@@ -29,7 +29,7 @@ public class CarRental {
     private Integer age;
 
     @ManyToOne
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "model")
     private Car car;
 
     private LocalDateTime createDate;

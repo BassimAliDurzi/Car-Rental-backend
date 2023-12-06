@@ -13,15 +13,9 @@ import lombok.*;
 
 public class CarDTO {
 
-    @NotNull
-    private Integer id;
-
     @NotBlank
     private String model;
 
-    @NotNull
-    private double rentPerDay;
 
-    @NotNull
-    private Boolean available = Boolean.TRUE;
+
 }

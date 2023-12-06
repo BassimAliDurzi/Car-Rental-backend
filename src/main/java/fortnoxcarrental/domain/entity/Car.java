@@ -11,15 +11,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
+@ToString
 
 @Entity
 public class Car{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private Long id;
-
     private String model;
 
     @Column(nullable = false)
@@ -46,13 +45,19 @@ public class Car{
         this.model = model;
     }
 
-    public void addCarRental(CarRental carRental) {
+    public void addCarRentalOrder(CarRental carRental) {
         carRentals.add(carRental);
         carRental.setCar(this);
+
+        Car car = new Car();
+        car.setAvailable(false);
     }
 
-    public void removeCarRental(CarRental carRental) {
+    public void removeCarRentalOrder(CarRental carRental) {
         carRentals.remove(carRental);
         carRental.setCar(null);
+
+        Car car = new Car();
+        car.setAvailable(true);
     }
 }

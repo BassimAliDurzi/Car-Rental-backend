@@ -1,10 +1,13 @@
 package fortnoxcarrental.service;
 
+import fortnoxcarrental.domain.dto.CarDTO;
 import fortnoxcarrental.domain.dto.CarRentalDTO;
 import fortnoxcarrental.domain.entity.CarRental;
 import fortnoxcarrental.repository.CarRentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CarRentalServiceImpl implements CarRentalService {
@@ -31,5 +34,10 @@ public class CarRentalServiceImpl implements CarRentalService {
         CarRental savedCarRental = carRentalRepository.save(carRentalEntity);
 
         return savedCarRental;
+    }
+
+    @Override
+    public List<CarRental> getAll() {
+        return null;
     }
 }

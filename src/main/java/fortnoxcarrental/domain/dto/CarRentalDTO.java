@@ -22,8 +22,9 @@ public class CarRentalDTO {
     @Min(18)
     private int age;
 
-    //@NotEmpty
-    private Car car;
+    //@NotNull
+    CarDTO car;
+
 
     @NotNull
     @Future
@@ -32,4 +33,8 @@ public class CarRentalDTO {
     @NotNull
     @Future
     private LocalDate returnDate;
+
+    public Car getCar() {
+        return null;
+    }
 }
