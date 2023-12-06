@@ -30,7 +30,7 @@ public class CarRentalServiceImpl implements CarRentalService {
                 .orElseThrow(() -> new IllegalArgumentException("Car model is not valid"));
 
         if (!car.getAvailable()) {
-            throw new IllegalStateException("Car is not available for rental");
+            throw new IllegalArgumentException("Car is not available for rental");
         }
 
         CarRental carRentalEntity = CarRental.builder()
