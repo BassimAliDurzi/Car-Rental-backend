@@ -34,12 +34,9 @@ public class CarRentalController {
         System.out.println("----->>>>>( Car Rental ID: " + id + " )<<<<<-----");
         CarRental carRental = carRentalService.findById(id);
 
-        if (carRental != null) {
-            CarRentalDTO carRentalDTO = convertToDTO(carRental);
+        if (carRental == null) throw new IllegalArgumentException("No CarRental order was found with the ID: " + id);
+        CarRentalDTO carRentalDTO = convertToDTO(carRental);
             return ResponseEntity.ok(carRentalDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @GetMapping("/carrentals")
