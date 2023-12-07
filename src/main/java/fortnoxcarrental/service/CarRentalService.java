@@ -1,10 +1,9 @@
 package fortnoxcarrental.service;
 
 
-import fortnoxcarrental.domain.dto.CarRentalDTO;
 import fortnoxcarrental.domain.entity.CarRental;
+import fortnoxcarrental.domain.dto.CarRentalDTO;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
