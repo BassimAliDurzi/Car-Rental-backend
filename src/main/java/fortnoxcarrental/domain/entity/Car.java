@@ -24,7 +24,6 @@ public class Car{
     @Column(nullable = false)
     private double rentPerDay;
 
-    @Column()
     private Boolean available;
 
     @OneToMany(mappedBy = "car")

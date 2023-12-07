@@ -3,6 +3,7 @@ package fortnoxcarrental.controller;
 import fortnoxcarrental.domain.dto.CarRentalDTO;
 import fortnoxcarrental.domain.entity.CarRental;
 import fortnoxcarrental.service.CarRentalServiceImpl;
+import fortnoxcarrental.service.CarServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,24 +14,23 @@ import java.util.List;
 @RequestMapping("/api/v1/FortnoxCarRental")
 @RestController
 public class CarRentalController {
-
     private final CarRentalServiceImpl carRentalService;
 
     @Autowired
-    public CarRentalController(CarRentalServiceImpl carRentalService) {
+    public CarRentalController(CarRentalServiceImpl carRentalService, CarServiceImpl carService) {
         this.carRentalService = carRentalService;
     }
 
     @PostMapping
     public ResponseEntity<CarRental> doRegisterOrder(@RequestBody @Valid CarRentalDTO dto) {
         System.out.println("DTO: " + dto);
-        CarRental response = carRentalService.registerOrder(dto);
-        return ResponseEntity.ok().body(response);
+        CarRental responseBody = carRentalService.registerOrder(dto);
+        return ResponseEntity.ok().body(responseBody);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<CarRentalDTO> getCarRentalByID(@PathVariable Long id) {
-
+        System.out.println("----->>>>>( Car Rental ID: " + id + " )<<<<<-----");
         CarRental carRental = carRentalService.findById(id);
 
         if (carRental != null) {
@@ -40,8 +40,10 @@ public class CarRentalController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping("/carrentals")
     public ResponseEntity<List<CarRentalDTO>> getAll() {
+        System.out.println("----->>>>>( All Car Rental Orders )<<<<<-----");
         List<CarRentalDTO> carRentals = carRentalService.findAll();
 
         if (carRentals != null && !carRentals.isEmpty()) {
@@ -50,8 +52,6 @@ public class CarRentalController {
             return ResponseEntity.noContent().build();
         }
     }
-
-
 
     private CarRentalDTO convertToDTO(CarRental carRental) {
         return CarRentalDTO.builder()
