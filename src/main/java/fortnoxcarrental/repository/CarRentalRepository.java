@@ -1,7 +1,6 @@
 package fortnoxcarrental.repository;
 
 import fortnoxcarrental.domain.entity.CarRental;
-import fortnoxcarrental.domain.dto.CarRentalDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

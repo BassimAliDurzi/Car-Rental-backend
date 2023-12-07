@@ -1,6 +1,5 @@
 package fortnoxcarrental.service;
 
-
 import fortnoxcarrental.domain.entity.CarRental;
 import fortnoxcarrental.domain.dto.CarRentalDTO;
 
