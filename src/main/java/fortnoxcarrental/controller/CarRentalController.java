@@ -6,6 +6,7 @@ import fortnoxcarrental.service.CarRentalServiceImpl;
 import fortnoxcarrental.service.CarServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class CarRentalController {
     public ResponseEntity<CarRental> doRegisterOrder(@RequestBody @Valid CarRentalDTO dto) {
         System.out.println("DTO: " + dto);
         CarRental responseBody = carRentalService.registerOrder(dto);
-        return ResponseEntity.ok().body(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
     @GetMapping("id/{id}")

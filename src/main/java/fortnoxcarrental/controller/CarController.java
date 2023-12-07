@@ -5,6 +5,7 @@ import fortnoxcarrental.domain.entity.Car;
 import fortnoxcarrental.service.CarServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class CarController {
     public ResponseEntity<Car> addCar(@RequestBody @Valid CarDTO dto) {
         System.out.println("DTO: " + dto);
         Car responseBody = carService.addCar(dto);
-        return ResponseEntity.ok().body(responseBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
 }
