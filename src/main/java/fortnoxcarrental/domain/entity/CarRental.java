@@ -62,6 +62,9 @@ public class CarRental {
         this.revenue = revenue;
     }
 
+    public CarRental(Long id) {
+        this.id = id;
+    }
 
     @PrePersist
     public void calculateRevenue() {

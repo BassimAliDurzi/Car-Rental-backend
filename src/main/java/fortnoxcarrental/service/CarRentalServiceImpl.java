@@ -8,6 +8,10 @@ import fortnoxcarrental.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CarRentalServiceImpl implements CarRentalService {
 
@@ -46,6 +50,29 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRepository.save(car);
 
         return savedCarRental;
+    }
+
+    @Override
+    public List<CarRentalDTO> findAll() {
+        List<CarRental> carRentals = carRentalRepository.findAll();
+        return carRentals.stream()
+                .map(this::mapToCarRentalDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CarRental findById(Long id) {
+        return carRentalRepository.findById(id)
+                .orElse(null);
+    }
+    private CarRentalDTO mapToCarRentalDTO(CarRental carRental) {
+        return CarRentalDTO.builder()
+                .customerName(carRental.getCustomerName())
+                .age(carRental.getAge())
+                .carModel(carRental.getCar().getModel())
+                .pickUpdate(carRental.getPickUpdate())
+                .returnDate(carRental.getReturnDate())
+                .build();
     }
 }
 
