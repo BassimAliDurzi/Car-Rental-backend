@@ -14,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("/api/v1/FortnoxCarRental")
 @RestController
+@CrossOrigin(origins = "http://localhost:3007")
 public class CarRentalController {
     private final CarRentalServiceImpl carRentalService;
 
@@ -40,6 +41,7 @@ public class CarRentalController {
     }
 
     @GetMapping("/carrentals")
+    @CrossOrigin(origins = "http://localhost:3007")
     public ResponseEntity<List<CarRentalDTO>> getAll() {
         System.out.println("----->>>>>( All Car Rental Orders )<<<<<-----");
         List<CarRentalDTO> carRentals = carRentalService.findAll();
