@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 public class CarRentalDTO {
 
+    private Long id;
+
     @NotBlank(message = "You must type your name")
     private String customerName;
 
@@ -30,13 +32,18 @@ public class CarRentalDTO {
     @Future
     private LocalDate returnDate;
 
+    private Double revenue;
 
-    public CarRentalDTO(String customerName, int age, String carModel, LocalDate pickUpdate, LocalDate returnDate) {
+
+    public CarRentalDTO(Long id, String customerName, int age, String carModel, LocalDate pickUpdate, LocalDate returnDate, Double revenue) {
+        this.id = id;
         this.customerName = customerName;
         this.age = age;
         this.carModel = carModel;
         this.pickUpdate = pickUpdate;
         this.returnDate = returnDate;
+        this.revenue = revenue;
+
         validateDates();
     }
 
@@ -46,4 +53,6 @@ public class CarRentalDTO {
             throw new ValidationException("Return date must be after pick-up date");
         }
     }
+
+
 }

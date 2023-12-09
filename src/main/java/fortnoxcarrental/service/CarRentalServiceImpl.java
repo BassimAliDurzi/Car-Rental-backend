@@ -66,11 +66,13 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
     private CarRentalDTO mapToCarRentalDTO(CarRental carRental) {
         return CarRentalDTO.builder()
+                .id(carRental.getId())
                 .customerName(carRental.getCustomerName())
                 .age(carRental.getAge())
                 .carModel(carRental.getCar().getModel())
                 .pickUpdate(carRental.getPickUpdate())
                 .returnDate(carRental.getReturnDate())
+                .revenue(carRental.getRevenue())
                 .build();
     }
 }
