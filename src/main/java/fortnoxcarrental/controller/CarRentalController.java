@@ -54,6 +54,7 @@ public class CarRentalController {
 
     private CarRentalDTO convertToDTO(CarRental carRental) {
         return CarRentalDTO.builder()
+                .id(carRental.getId())
                 .customerName(carRental.getCustomerName())
                 .age(carRental.getAge())
                 .carModel(carRental.getCar().getModel())
