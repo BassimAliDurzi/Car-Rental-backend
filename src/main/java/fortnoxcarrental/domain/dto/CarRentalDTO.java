@@ -1,8 +1,13 @@
 package fortnoxcarrental.domain.dto;
 
 import jakarta.validation.ValidationException;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.LocalDate;
 
