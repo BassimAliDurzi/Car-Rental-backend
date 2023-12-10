@@ -2,6 +2,7 @@ package fortnoxcarrental.service;
 
 import fortnoxcarrental.domain.dto.UserDTO;
 import fortnoxcarrental.domain.entity.User;
+import fortnoxcarrental.repository.CarRentalRepository;
 import fortnoxcarrental.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CarRentalRepository carRentalRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, CarRentalRepository carRentalRepository) {
         this.userRepository = userRepository;
+        this.carRentalRepository = carRentalRepository;
     }
 
     @Override
@@ -27,6 +30,8 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (user.getPassword().equals(userDTO.getPassword())) {
+                carRentalRepository.findAll();
+
                 return user;
             } else {
                 throw new IllegalArgumentException("Invalid password");
