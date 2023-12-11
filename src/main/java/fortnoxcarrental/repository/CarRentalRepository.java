@@ -1,5 +1,6 @@
 package fortnoxcarrental.repository;
 
+import fortnoxcarrental.domain.entity.Car;
 import fortnoxcarrental.domain.entity.CarRental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,5 @@ public interface CarRentalRepository extends JpaRepository<CarRental,Long> {
     @Override
     List<CarRental> findAll();
 
+    List<CarRental> findTop1ByCarOrderByReturnDateDesc(Car car);
 }

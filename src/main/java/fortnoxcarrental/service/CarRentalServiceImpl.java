@@ -32,8 +32,10 @@ public class CarRentalServiceImpl implements CarRentalService {
         Car car = carRepository.findById(dto.getCarModel())
                 .orElseThrow(() -> new IllegalArgumentException("Car model is not valid"));
 
-        if (!car.getAvailable()) {
-            throw new IllegalArgumentException("Car is not available for rental");
+        List<CarRental> lastReservation = carRentalRepository.findTop1ByCarOrderByReturnDateDesc(car);
+
+        if (!lastReservation.isEmpty() && dto.getPickUpdate().isBefore(lastReservation.get(0).getReturnDate())) {
+            throw new IllegalArgumentException("Car is not available for this date");
         }
 
         CarRental carRentalEntity = CarRental.builder()
@@ -45,6 +47,7 @@ public class CarRentalServiceImpl implements CarRentalService {
                 .build();
 
         CarRental savedCarRental = carRentalRepository.save(carRentalEntity);
+
         car.setAvailable(false);
         carRepository.save(car);
 
